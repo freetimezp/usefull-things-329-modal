@@ -9,3 +9,74 @@
 a {
     text-decoration: none;
 }
+
+body {
+    background: #f1f1f1;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: #141414;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+a {
+    text-align: center;
+    font-size: 30px;
+    width: 220px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 25px;
+    display: block;
+    cursor: pointer;
+}
+
+a.open {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+a.close {
+    position: relative;
+    width: max-content;
+    height: max-content;
+    line-height: 100%;
+    padding: 10px 20px;
+    color: #141414;
+    border: 2px solid #141414;
+}
+
+.content {
+    position: absolute;
+    background: #fff;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    border: 5px solid #141414;
+    transform: perspective(1000px) rotateY(720deg) scale(0);
+    transition: 1s;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+}
+
+.content p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.active {
+    transform: perspective(1000px) rotateY(0deg) scale(1);
+}
