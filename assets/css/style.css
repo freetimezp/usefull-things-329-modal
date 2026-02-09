@@ -11,72 +11,192 @@ a {
 }
 
 body {
-    background: #f1f1f1;
+    height: 100vh;
+    background: linear-gradient(135deg, #0b0b0c, #111);
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    color: white;
 }
 
-.box {
+/* OPEN BUTTON */
+#open {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    background: #141414;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+    padding: 18px 48px;
+    font-size: 18px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
 }
 
-a {
-    text-align: center;
-    font-size: 30px;
-    width: 220px;
-    height: 80px;
-    line-height: 80px;
-    border-radius: 25px;
+/* MODAL ROOT */
+#modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    perspective: 2000px;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 10;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* 3D SURFACE */
+#gl {
+    width: 560px;
+    height: 380px;
+    border-radius: 28px;
+
+    /* CINEMATIC SHADOW */
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.65), 0 10px 25px rgba(0, 0, 0, 0.45);
+
+    /* SOFT OUTER GLOW */
+    outline: 1px solid rgba(255, 255, 255, 0.06);
+
+    transform: rotateX(55deg) scale(0.45);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 0.84, 0.44, 1), opacity 0.4s;
+    pointer-events: none;
+}
+
+/* CARD */
+.card {
+    position: absolute;
+    width: 560px;
+    height: 380px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    border-radius: 28px;
+
+    /* INNER BEVEL */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.15)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+
+    /* BORDER RING */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), inset 0 0 0 2px rgba(255, 255, 255, 0.04);
+
+    transform: translateZ(90px) scale(0.9);
+    opacity: 0;
+    transition: 0.7s ease;
+    pointer-events: auto;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    pointer-events: none;
+
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.18),
+        transparent 40%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.08)
+    );
+
+    opacity: 0.35;
+}
+
+/* ACTIVE */
+#modal.active #gl {
+    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.75), 0 20px 40px rgba(0, 0, 0, 0.5);
+    transform: rotateX(0deg) scale(1);
+    opacity: 1;
+}
+
+#modal.active .card {
+    transform: translateZ(90px) scale(1);
+    opacity: 1;
+}
+
+/* HEADER */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.tag {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* TITLE */
+h1 {
+    font-size: 34px;
+    letter-spacing: -0.02em;
+}
+
+/* DIVIDER */
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* TEXT */
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* META */
+.meta {
+    display: flex;
+    gap: 30px;
+}
+
+.meta small {
     display: block;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.meta strong {
+    font-size: 16px;
+}
+
+/* ACTIONS */
+.actions {
+    margin-top: auto;
+    display: flex;
+    gap: 16px;
+}
+
+button.primary {
+    padding: 14px 34px;
+    background: white;
+    color: black;
+    border: none;
     cursor: pointer;
 }
 
-a.open {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    border: 2px solid #fff;
-}
-
-a.close {
-    position: relative;
-    width: max-content;
-    height: max-content;
-    line-height: 100%;
-    padding: 10px 20px;
-    color: #141414;
-    border: 2px solid #141414;
-}
-
-.content {
-    position: absolute;
-    background: #fff;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 50px;
-    border: 5px solid #141414;
-    transform: perspective(1000px) rotateY(720deg) scale(0);
-    transition: 1s;
-}
-
-.content h1 {
-    margin-bottom: 20px;
-}
-
-.content p {
-    text-align: justify;
-    margin-bottom: 20px;
-}
-
-.active {
-    transform: perspective(1000px) rotateY(0deg) scale(1);
+button.ghost {
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    cursor: pointer;
 }

@@ -9,35 +9,48 @@
     </head>
 
     <body>
-        <div class="box">
-            <a class="open">Show Modal</a>
+        <button id="open">OPEN CARD</button>
 
-            <div class="content">
-                <h1>Lorem ipsum dolor sit amet.</h1>
+        <div id="modal">
+            <!-- 3D SURFACE -->
+            <canvas id="gl"></canvas>
 
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, praesentium sint veritatis quas
-                    architecto nesciunt consequuntur ipsa sit qui aut? Quaerat dolor esse ex quae earum itaque ad eum
-                    ullam accusamus ipsum vero laboriosam tempora a perspiciatis quod, et doloremque inventore eligendi
-                    impedit tenetur unde illo nam? Recusandae, expedita quaerat dolor natus iusto deleniti commodi
-                    eveniet cum adipisci animi minima nisi? Eum tempore expedita architecto impedit, ab neque harum
-                    consectetur.
-                </p>
+            <!-- CARD CONTENT -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="tag">FEATURED</span>
+                    <span class="date">2026</span>
+                </div>
 
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, praesentium sint veritatis quas
-                    architecto nesciunt consequuntur ipsa sit qui aut? Quaerat dolor esse ex quae earum itaque ad eum
-                    ullam accusamus ipsum vero laboriosam tempora a perspiciatis quod, et doloremque inventore eligendi
-                    impedit tenetur unde illo nam? Recusandae, expedita quaerat dolor natus iusto deleniti commodi
-                    eveniet cum adipisci animi minima nisi? Eum tempore expedita architecto impedit, ab neque harum
-                    consectetur.
-                </p>
+                <h1>Luxury Interface</h1>
 
-                <a class="close">close</a>
+                <div class="divider"></div>
+
+                <p>This is not a popup. It is a physical object living in space — layered, animated, intentional.</p>
+
+                <div class="meta">
+                    <div>
+                        <small>Depth</small>
+                        <strong>3D</strong>
+                    </div>
+                    <div>
+                        <small>Shader</small>
+                        <strong>Active</strong>
+                    </div>
+                    <div>
+                        <small>Motion</small>
+                        <strong>Heavy</strong>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="primary">EXPLORE</button>
+                    <button id="close" class="ghost">CLOSE</button>
+                </div>
             </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
         <script src="./assets/js/main.js"></script>
     </body>
